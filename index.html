@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>RSVP Undangan</title>
+
+<style>
+:root{
+  --warna-utama:#b68c5a;
+  --font:'Georgia',serif;
+}
+body{margin:0;font-family:var(--font);}
+.rsvp-box{max-width:420px;padding:20px;border:1px solid #ddd;border-radius:12px}
+input,select,textarea,button{width:100%;margin-bottom:12px;padding:10px}
+button{background:var(--warna-utama);color:#fff;border:none}
+</style>
+</head>
+
+<body>
+<div class="rsvp-box">
+<h3>Konfirmasi Kehadiran</h3>
+
+<form id="rsvpForm">
+<select name="kehadiran" required>
+<option value="">-- Kehadiran --</option>
+<option value="Hadir">Hadir</option>
+<option value="Tidak Hadir">Tidak Hadir</option>
+</select>
+
+<textarea name="ucapan" placeholder="Ucapan & Doa"></textarea>
+<input name="rekening" placeholder="Nomor Rekening (opsional)">
+<button type="submit">Kirim RSVP</button>
+</form>
+</div>
+
+<script>
+const scriptURL="ISI_URL_GOOGLE_APPS_SCRIPT";
+document.getElementById("rsvpForm").addEventListener("submit",e=>{
+e.preventDefault();
+fetch(scriptURL,{method:"POST",body:new FormData(e.target)})
+.then(()=>alert("RSVP terkirim 🤍"))
+.catch(()=>alert("Gagal"));
+e.target.reset();
+});
+</script>
+
+</body>
+</html>
